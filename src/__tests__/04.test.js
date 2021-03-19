@@ -1,6 +1,6 @@
 import { render, screen, act } from "@testing-library/react";
-import App from "../exercise/03";
-// import App from "../solution/03";
+import App from "../exercise/04";
+// import App from "../solution/04";
 
 beforeEach(() => {
   jest.useFakeTimers();
@@ -11,7 +11,7 @@ afterEach(() => {
   jest.useRealTimers();
 });
 
-describe("Exercise 03", () => {
+describe("Exercise 04", () => {
   test("displays the current time on render", () => {
     render(<App />);
 
