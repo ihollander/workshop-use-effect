@@ -30,7 +30,9 @@ function App() {
         initialText={text}
         initialFilter={filter}
       />
-      {image && <img src={image} alt={`A cat saying ${text}`} />}
+      {image && (
+        <img src={`https://cataas.com${image}`} alt={`A cat saying ${text}`} />
+      )}
     </div>
   );
 }
