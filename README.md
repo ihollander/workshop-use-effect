@@ -1,4 +1,4 @@
-# Custom Hooks Workshop
+# Side Effects and Data Fetching
 
 ## Setup
 
