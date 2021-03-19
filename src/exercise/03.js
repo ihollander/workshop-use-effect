@@ -11,10 +11,7 @@ function App() {
       .then(data => {
         setImage(data.url);
       });
-  }, []);
-  // ✅ update the dependencies array!
-  // read the warning message (either hover over the [] in VSCode, or look in the console in chrome)
-  // add any dependency variables to this array
+  }, [filter, text]);
 
   // 🚫 no need to update the code below here
 

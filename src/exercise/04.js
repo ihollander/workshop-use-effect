@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 
+// cleanup fn:
+
 function Clock() {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
     console.log("Running side effect");
     // ✅ save the interval to a variable
-    setInterval(() => {
+    const interval = setInterval(() => {
       console.log("Setting state");
       setTime(new Date());
     }, 1000);
 
-    return function cleanup() {
+    return () => {
       console.log("Running cleanup");
       // ✅ clear the interval so state is no longer updated
+      clearInterval(interval);
     };
   }, []);
 
