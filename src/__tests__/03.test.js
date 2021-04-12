@@ -30,7 +30,27 @@ describe("Exercise 03", () => {
     });
 
     // submit the form
-    fireEvent.click(screen.getByText(/cat me/i));
+    fireEvent.click(screen.getByText(/update text/i));
+
+    await waitFor(() => {
+      // check if the URL has changed
+      expect(img.src).not.toBe(src);
+    });
+  });
+
+  test("displays a new cat image after the dropdown is changed", async () => {
+    render(<App />);
+
+    // get the first displayed image
+    const img = await screen.findByAltText(/a cat saying/i);
+
+    // save the src since we're checking later if it changes
+    const src = img.src;
+
+    // update the text state
+    fireEvent.change(screen.getByLabelText(/filter/i), {
+      target: { value: "paint" },
+    });
 
     await waitFor(() => {
       // check if the URL has changed

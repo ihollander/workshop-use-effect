@@ -20,52 +20,35 @@ function App() {
 
   // 🚫 no need to update the code below here
 
-  function handleSubmit({ text, filter }) {
+  function handleTextSubmit(text) {
     setText(text);
-    setFilter(filter);
   }
 
   return (
     <div className="App">
-      <CatPicForm
-        onSubmit={handleSubmit}
-        initialText={text}
-        initialFilter={filter}
-      />
       {image && (
-        <img src={`https://cataas.com${image}`} alt={`A cat saying ${text}`} />
+        <img
+          src={`https://cataas.com${image}`}
+          alt={`A cat saying ${text}`}
+          style={{ maxHeight: "50vh" }}
+        />
       )}
+      <div>
+        <CatPicFilters filter={filter} setFilter={setFilter} />
+        <CatPicText onTextSubmit={handleTextSubmit} initialText={text} />
+      </div>
+      <p>
+        A cat saying <strong>{text}</strong> with a <em>{filter}</em> filter.
+      </p>
     </div>
   );
 }
 
 const filters = ["", "blur", "mono", "sepia", "negative", "paint", "pixel"];
 
-function CatPicForm({ initialText, initialFilter, onSubmit }) {
-  const [text, setText] = useState(initialText);
-  const [filter, setFilter] = useState(initialFilter);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    onSubmit({ text, filter });
-  }
-
+function CatPicFilters({ filter, setFilter }) {
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "300px",
-        margin: "20px auto",
-      }}
-    >
-      <label htmlFor="text">Text</label>
-      <textarea
-        id="text"
-        value={text}
-        onChange={e => setText(e.target.value)}
-      />
+    <div>
       <label htmlFor="filter">Filter</label>
       <select
         id="filter"
@@ -78,7 +61,28 @@ function CatPicForm({ initialText, initialFilter, onSubmit }) {
           </option>
         ))}
       </select>
-      <button type="submit">Cat Me</button>
+    </div>
+  );
+}
+
+function CatPicText({ initialText, onTextSubmit }) {
+  const [text, setText] = useState(initialText);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onTextSubmit(text);
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="text">Text</label>
+      <input
+        type="text"
+        id="text"
+        value={text}
+        onChange={e => setText(e.target.value)}
+      />
+      <button type="submit">Update Text</button>
     </form>
   );
 }
