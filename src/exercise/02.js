@@ -1,15 +1,22 @@
 import { useState, useEffect } from "react";
 
+// using localStorage
+
 function App() {
   // ✅ update the initial state for text to read a value using localStorage.getItem("text")
-  const [text, setText] = useState("");
+  const initialText = localStorage.getItem("text1");
+  const [text, setText] = useState(initialText);
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    // ✅ when the side effect runs, use localStorage.setItem("text", value) to save the text to localStorage
+    document.title = `Clicks: ${count}`;
+  }, [count]);
+
+  useEffect(() => {
     console.log("Running side effect");
-  });
-  // ✅ use the dependencies array so that the side effect only runs if the text changes
+
+    localStorage.setItem("text1", text);
+  }, [text]);
 
   console.log("Rendering component");
 

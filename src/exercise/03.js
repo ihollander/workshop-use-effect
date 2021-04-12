@@ -12,8 +12,7 @@ function App() {
         setImage(data.url);
       });
     // 🗑 delete the line below, this is hiding a warning message
-    // eslint-disable-next-line
-  }, []);
+  }, [text, filter]);
   // ✅ update the dependencies array!
   // read the warning message (either hover over the [] in VSCode, or look in the console in chrome)
   // add any dependency variables to this array
